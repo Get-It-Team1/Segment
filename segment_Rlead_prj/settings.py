@@ -37,7 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.blog',#이거처럼
 ]
+#짱수 코멘트 : 여기에 설치 새로 한 앱 추가
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
