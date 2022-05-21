@@ -17,20 +17,10 @@ class Review(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     #좋아요
-    like = models.IntegerField()
+    #like = models.IntegerField()
 
     def __str__(self):
         return f'[{self.pk}]{self.title}::{self.author}'
 
     def get_absolute_url(self):
         return f'/'
-
-# class Book(models.Model):
-#     #책 제목
-#     title = models.CharField()
-
-#     #책 표지
-#     cover = models.ImageField()
-
-#     #저자
-#     author = models.CharField()

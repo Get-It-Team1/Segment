@@ -133,5 +133,6 @@ dmypy.json
 .idea/
 migrations/
 _media/
+images/
 
 #Added by Segment
