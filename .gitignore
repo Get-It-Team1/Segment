@@ -133,3 +133,6 @@ dmypy.json
 .idea/
 migrations/
 _media/
+
+#Added by Segment
+djangovenv
