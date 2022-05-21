@@ -1,16 +1,9 @@
-from django.shortcuts import render
-from .models import Post
+from .models import Review
+from django.views.generic import ListView, DetailView
 
-# Create your views here.
-def index(request):
-    #posts = Post.objects.all()
-    #post작성 후 주석지우기
-    
+class ReviewList(ListView):
+    model = Review
+    ordering='-pk'
 
-    return render(
-        request, 
-        'blog/index.html',
-        #{
-        #    'posts' :  posts,
-        #}
-    )
+class ReviewDetail(DetailView):
+    model = Review

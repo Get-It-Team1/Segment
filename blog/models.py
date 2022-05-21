@@ -1,36 +1,36 @@
-from cgitb import text
-from ctypes.wintypes import tagMSG
 from django.db import models
 
-# Create your models here.
-class Card(models.Model):
+class Review(models.Model):
     #서평 제목
     title = models.CharField(max_length=30)
-
-    #책 정보
-    book = models.CharField()
-
     #서평 본문
-    text = models.CharField()
-
+    content = models.TextField()
+    #책 표지
+    head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
+    #작성자
+    author = None
     #해시태그
     
     #카테고리
 
     #작성일
-    created_at = models.DateField()
-
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
     #좋아요
     like = models.IntegerField()
 
+    def __str__(self):
+        return f'[{self.pk}]{self.title}::{self.author}'
 
+    def get_absolute_url(self):
+        return f'/'
 
-class Book(models.Model):
-    #책 제목
-    title = models.CharField()
+# class Book(models.Model):
+#     #책 제목
+#     title = models.CharField()
 
-    #책 표지
-    cover = models.ImageField()
+#     #책 표지
+#     cover = models.ImageField()
 
-    #저자
-    author = models.CharField()
+#     #저자
+#     author = models.CharField()
