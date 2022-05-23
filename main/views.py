@@ -1,8 +1,12 @@
-from django.shortcuts import render
+from .models import Review
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
-def landing(request):
-    return render(
-        request,
-        'main/main.html',
-    )
+
+class ReviewList(ListView):
+    model = Review
+    ordering = '-pk'
+    
+
+class ReviewDetail(DetailView):
+    nodel = Review
