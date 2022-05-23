@@ -90,7 +90,7 @@
                             alt="..." /></a>
                     <div class="card-body">
                         <div class="small text-muted">January 1, 2022</div>
-                        <h2 class="card-title">{{ r.title }}</h2>
+                        <h2 class="card-title"><a href="{{r.get_absolute_url }}">{{ r.title }}</a></h2>
                         <p class="card-text">{{ r.content }}</p>
                         <a href="{{r.get_absolute_url }}" class="btn btn-primary" href="#!">Read more →</a>
 

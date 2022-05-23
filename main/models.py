@@ -23,4 +23,4 @@ class Review(models.Model):
         return f'[{self.pk}]{self.title}::{self.author}'
 
     def get_absolute_url(self):
-        return f'/'
+        return f'/{self.pk}'

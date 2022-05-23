@@ -9,4 +9,4 @@ class ReviewList(ListView):
     
 
 class ReviewDetail(DetailView):
-    nodel = Review
+    model = Review
