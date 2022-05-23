@@ -1,14 +1,10 @@
-from django.shortcuts import render
-from .models import Card
+from .models import Review
+from django.views.generic import ListView, DetailView
 
 # Create your views here.
-def index(request):
-    cards = Card.objects.all()
+class ReviewList(ListView):
+    model = Review
+    ordering = '-pk'
 
-    return render(
-        request,
-        'blog/index.html',
-        {
-            'cards': cards,
-        }
-    )
+class ReviewDetail(DetailView):
+    nodel = Review
