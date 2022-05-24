@@ -4,49 +4,26 @@
 
 <head>
     <title>{% block head_title %}Blog{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'blog/bootstrap/bootstrap.min.css' %}" media="screen">
-
+    <link rel="stylesheet" href="{% static 'main/bootstrap/bootstrap.min.css' %}" media="screen">
+    <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
     <script src="https://kit.fontawesome.com/8055a11cd0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
     {% include 'main/navbar.html' %}
 
-    <div class="container my-3">
-        <div class="row">
-            <div class="col-md-8 col-lg-9" id="main-area">
+    
+    
+    <div class = "row">
+        <!--sidebar-->
+        <div class="col-lg-1 col-md-2">
+            {%include 'main/sidebar.html'%}
+        </div>
+
+        <div class="container my-3 col-md-10 col-lg-11">
+            <div id="main-area">
                 {% block main_area %}
                 {% endblock %}
-            </div>
-
-            <div class="col-md-4 col-lg-3">
-                <!-- Search Widget -->
-                <div class="card my-4">
-                    <h5 class="card-header">Search</h5>
-                    <div class="card-body">
-                        <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Search for...">
-                            <span class="input-group-btn">
-                                <button class="btn btn-secondary" type="button">Go!</button>
-                            </span>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Categories Widget -->
-                <div class="card my-4" id="categories-card">
-                    <h5 class="card-header">Categories</h5>
-                    <div class="card-body">
-                        <div class="row">
-                            <ul class="list-unstyled mb-0">
-                                {% for category in categories %}
-                                <li><a href="{{category.get_absolute_url}}">{{category}} ({{category.post_set.count}})</a></li>
-                                {% endfor %}
-                                <li><a href="/blog/category/no_category">미분류 ({{no_category_post_count}})</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
@@ -54,6 +31,8 @@
     {%include 'main/footer.html'%}
 
 
+    
+    <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
         crossorigin="anonymous"></script>
