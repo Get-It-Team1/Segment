@@ -1,0 +1,19 @@
+{% load static %}
+<div class="card mb-4 mx-2" style="width:350px">
+                
+    <div class="row">
+        <div class="col-md-4">
+            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/350X550/dee2e6/6c757d.jpg"
+                alt="..." /></a>
+        </div>
+        <div class ="col-md-8">
+            <div class="card-body">
+                <div class="card-title"><a href="{{r.get_absolute_url }}">{{ r.title }}</a></div>
+                <div>
+                    Posted on {{ r.created_at }} <br>by
+                    <a href = "#">작성자 명 쓸 위치</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
