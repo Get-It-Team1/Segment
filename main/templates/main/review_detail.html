@@ -9,6 +9,11 @@
                 <header class="mb-4">
                     <!-- Post title-->
                     <h1 class="fw-bolder mb-1">{{review.title}}</h1>
+                    <!--author-->
+                    <p class="lead">
+                        by
+                        <a href="#">{{review.author|upper}}</a>
+                    </p>
                     <!-- Post meta content-->
                     <div class="text-muted fst-italic mb-2">{{review.updated_at}}</div>
                     <!-- Post categories-->

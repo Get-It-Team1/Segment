@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import User
 import os
 
-author = models.ForeignKey(User,null=True, on_delete=models.SET_NULL)
 
 class Review(models.Model):
     #서평 제목
@@ -12,7 +11,7 @@ class Review(models.Model):
     #책 표지
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
     #작성자
-    author = None
+    author = models.ForeignKey(User,null=True, on_delete=models.SET_NULL, blank=True)
     #해시태그
     
     #카테고리
@@ -41,3 +40,22 @@ class Review(models.Model):
     def get_absolute_url(self):
         return f'/{self.pk}'
 
+class Experience(models.Model):
+    #체험단 제목
+    title = models.CharField(max_length=30)
+    #체험단 본문
+    content = models.TextField()
+    #책 표지
+    head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
+    #작성자
+    author = None
+    
+
+    #작성일
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    def __str__(self):
+        return f'[{self.pk}]{self.title}::{self.author}'
+
+    def get_absolute_url(self):
+        return f'/{self.pk}'
