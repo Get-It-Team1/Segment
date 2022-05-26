@@ -1,63 +1,60 @@
 <!DOCTYPE html>
-<html lang="en">
   {%load static%}
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'main/css/sidebar.css' %}">
-    <title>Document</title>
+   <link rel="stylesheet" href="{% static 'main/css/sidebar.css' %}" media="screen">
 </head>
 <body>
-    <div class="flex-shrink-0 p-3 bg-white" style="width: 280px; background-color: navy;">
+    <div class="flex-shrink-0 p-3 pe-0 bg-light" style="height : 100%">
+      <a href="/" class="d-flex align-items-center pb-3 mb-3 link-dark text-decoration-none border-bottom">
+        <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg>
+        <span class="fs-2 fw-bold" style="color: #6e792c;">Rlead</span>
+      </a>
+      <ul class="list-unstyled ps-3">
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" >
+            마이 페이지
+          </button>
+          <div class="collapse show" id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">내 서재</a></li>
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">내 블로그</a></li>                
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">서평 작성하기</a></li>
+            </ul>
+          </div>
+        </li>
         
-        <ul class="list-unstyled ps-0">
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-              마이 페이지
-            </button>
-            <div class="collapse show" id="home-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">내 서재</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">내 블로그</a></li>                
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">프로필</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">설정</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">로그아웃</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
-              커뮤니티
-            </button>
-          </li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
-              체험단
-            </button>
-            <div class="collapse" id="orders-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">체험단 공고 올리기</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">체험단 신청하기</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">체험단 신청 결과</a></li>
-              </ul>
-            </div>
-          </li>
-          <li class="border-top my-3"></li>
-          <li class="mb-1">
-            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-              Account
-            </button>
-            <div class="collapse" id="account-collapse">
-              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">New...</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
-                <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Sign out</a></li>
-              </ul>
-            </div>
-          </li>
-        </ul>
-      </div>
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#orders-collapse" aria-expanded="false">
+            체험단
+          </button>
+          <div class="collapse" id="orders-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">체험단 공고 올리기</a></li>
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">체험단 신청하기</a></li>
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">체험단 신청 결과</a></li>
+            </ul>
+          </div>
+        </li>
+        <li class="mb-1">
+          <button class="btn-light btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-expanded="false">
+            커뮤니티
+          </button>
+        </li>
+
+        <li class="border-top my-3" ></li>
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
+            계정
+          </button>
+          <div class="collapse" id="account-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Profile</a></li>
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Settings</a></li>
+              <li><a href="#" class="link-dark d-inline-flex text-decoration-none rounded">Logout</a></li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+    </div>
 </body>
 </html>

@@ -1,7 +1,7 @@
 from pyexpat import model
 from urllib import request
 from django.shortcuts import render
-from .models import Review
+from .models import Experience, Review
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
@@ -27,3 +27,15 @@ def ReviewList(request):
 class ReviewDetail(DetailView):
     model = Review
 
+def ExperienceList(request):
+    experinece_pk = Experience.objects.all().order_by('-pk')[:18]
+    experinece_dueto = Experience.objects.all().order_by('created_at')[:18]
+
+    return render(
+        request,
+        'main/Experience.html',
+        {
+            'experience_pk' : experinece_pk,
+            'experience_dueto': experinece_dueto,
+        }
+    )

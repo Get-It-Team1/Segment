@@ -1,5 +1,5 @@
 {% load static %}
-<div class="card mb-4 mx-2 py-3" style="width:320px" >
+<div class="card mb-4 mx-2" style="width:320px">
                 
     <div class="row">
         <div class="col-md-4">
@@ -7,17 +7,16 @@
                 alt="..." /></a>
         </div>
         <div class ="col-md-8">
-            <div class="card-body py-0" style="height: 100%;">
-                <div class="card-title" style = "font-size: 18px; height: 30%;"><a class = " text-decoration-none" href="{{r.get_absolute_url }}" style="color : black;">{{ r.title }}<br></a></div>
+            <div class="card-body" style="height: 100%;">
+                <div class="card-title" style = "font-size: 18px; height: 30%;"><a href="{{r.get_absolute_url }}">{{ r.title }}<br></a></div>
                 
                 <div class="text-small text-muted text-end " style="font-size:  12px;">
-                    by <a href = "#" class="text-end text-decoration-none" style="color: black;">작성자 명 쓸 위치</a>
+                    by <a href = "#" class="text-end">작성자 명 쓸 위치</a>
                 </div>
                 
                 <div class="text-small text-muted" style="font-size:  12px;">
                     Posted on {{ r.created_at }}
                 </div>
-                <div class = "text-end text-small text-muted" style="position: relative; top:15px;"> like = {{ r.like }}</div>
             </div>
         </div>
     </div>
