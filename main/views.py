@@ -11,10 +11,6 @@ from django.utils.text import slugify
 from django.shortcuts import get_object_or_404
 
 # Create your views here.
-
-'''class ReviewList(ListView):
-    model = Review
-    ordering = '-pk'''
     
 def ReviewList(request):
     review_pk = Review.objects.all().order_by('-pk')[:18]
@@ -68,7 +64,7 @@ def tag_page(request, slug):
 
     return render(
         request,
-        'blog/post_list.html',
+        'main/tag_list.html',
         {
             'post_list':post_list,
             'tag':tag,

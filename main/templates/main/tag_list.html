@@ -1,0 +1,21 @@
+{%extends 'main/base.html' %}
+
+
+{% block main_area %}
+    <div class="container">
+        <h1 class="pb-3"><br>{% if tag %}<span class="badge rounded-pill bg-primary"><i class="fas fa-tags"></i>{{ tag }}({{ tag.post_set.count }})</span>{% endif %} 모아보기</h1>
+        <div class="row my-0">
+            
+            
+           
+                <h3 class="py-3">태그 관련 독서평</h3>
+                {% for r in post_list %}
+                    {% include 'main/card.html' %}
+                {% endfor %}
+
+
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}
