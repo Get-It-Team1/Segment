@@ -1,4 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
+import os
+
+author = models.ForeignKey(User, on_delete=models.CASCADE)
 
 class Review(models.Model):
     #서평 제목
@@ -23,4 +27,10 @@ class Review(models.Model):
         return f'[{self.pk}]{self.title}::{self.author}'
 
     def get_absolute_url(self):
-        return f'/{self.pk}'
+        return f'/blog{self.pk}/'
+
+    def get_file_name(self):
+        return os.path.basename(self.file_upload.name)
+
+    def get_file_ext(self):
+        return self.get_file_name().split('_')[-1]
