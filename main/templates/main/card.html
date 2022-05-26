@@ -15,7 +15,8 @@
                 </div>
                 
                 <div class="text-small text-muted" style="font-size:  12px;">
-                    Posted on {{ r.created_at }}
+                    Posted on {{ r.created_at }} by
+                    <a href="#">{{ r.author | upper }}</a>
                 </div>
                 <div class = "text-end text-small text-muted" style="position: relative; top:15px;"> like = {{ r.like }}</div>
             </div>
