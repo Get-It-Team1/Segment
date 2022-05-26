@@ -1,8 +1,14 @@
-from pyexpat import model
-from urllib import request
-from django.shortcuts import render
-from .models import Experience, Review
-from django.views.generic import ListView, DetailView
+from re import L
+from typing import List
+from django.shortcuts import render, redirect
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from requests import RequestException
+from .models import Review, Experience
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.core.exceptions import PermissionDenied
+from django.utils.text import slugify
+#from .forms import CommentForm
+from django.shortcuts import get_object_or_404
 
 # Create your views here.
 
@@ -26,6 +32,22 @@ def ReviewList(request):
 
 class ReviewDetail(DetailView):
     model = Review
+
+class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
+    model = Review
+    fields = ['title', 'content', 'head_image']
+
+    def test_func(self):
+        return self.request.user.is_superuser or self.request.user.is_staff
+
+    def form_valid(self, form):
+        current_user = self.request.user
+        if current_user.is_authenticated:
+            form.instance.author = current_user
+            return super(PostCreate, self).form_valid(form)
+        else:
+            return redirect('/')
+
 
 def ExperienceList(request):
     experinece_pk = Experience.objects.all().order_by('-pk')[:18]

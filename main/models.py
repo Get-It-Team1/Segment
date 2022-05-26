@@ -24,6 +24,8 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.pk}'
+    
+    
 
 class Experience(models.Model):
     #체험단 제목
@@ -44,3 +46,4 @@ class Experience(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.pk}'
+
