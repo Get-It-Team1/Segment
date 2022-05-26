@@ -1,0 +1,24 @@
+{%extends 'main/base.html' %}
+
+{% block main_area %}
+    <div class="container">
+        <h1 class="pb-3">체험단</h1>
+        <div class="row my-3">
+           
+                <h3>새로 올라온 체험단</h3>
+                {% for r in experience_pk %}
+                    {% include 'main/post.html' %}
+                {% endfor %}
+
+                <div class="border-top my-3"></div>
+
+                <h3>곧 마감 되는 체험단</h3>
+                {% for r in experience_dueto %}
+                    {% include 'main/post.html' %}                    
+                {% endfor %}
+
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}

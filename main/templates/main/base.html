@@ -4,24 +4,27 @@
 
 <head>
     <title>{% block head_title %}Blog{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'main/css/segment.css' %}" media="screen">
+    <link rel="stylesheet" href="{% static 'main/css/base.css' %}" media="screen">
     <link rel="stylesheet" href="{% static 'main/bootstrap/bootstrap.min.css' %}" media="screen">
     <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="{%static 'main/css/swiper.css'%}">
     <script src="https://kit.fontawesome.com/8055a11cd0.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
-    {% include 'main/navbar.html' %}
+    
 
     
-    
-    <div class = "row">
+    <div class = "row" style="border : 0px;">
         <!--sidebar-->
-        <div class="col-lg-1 col-md-2">
+        <div class="col-lg-2 col-md-4 col-sm-6" style="padding : 0px;">
             {%include 'main/sidebar.html'%}
         </div>
 
-        <div class="container my-3 col-md-10 col-lg-11">
-            <div id="main-area">
+        <div class="container my-0 col-md-8 col-lg-10 col-sm-6" style="padding : 0px;">
+            {% include 'main/header.html' %}
+            <div id="main-area" style="background-color: RGB(249, 249, 249);">
                 {% block main_area %}
                 {% endblock %}
             </div>
@@ -31,7 +34,7 @@
     {%include 'main/footer.html'%}
 
 
-    
+    <script src="{% static 'main/js/bootstrap.bundle.min.js' %}"></script>
     <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
         integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
@@ -42,6 +45,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
         integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
         crossorigin="anonymous"></script>
+    <script src="{%static 'main/js/swiper-initialize.js'%}"></script>
 
 </body>
 
