@@ -19,6 +19,8 @@
                     {% include 'main/card.html' %}                    
                 {% endfor %}
 
+                {% if tag %}<span class="badge rounded-pill bg-primary"><i class="fas fa-tags"></i>{{ tag }}({{ tag.post_set.count }})</span>{% endif %}
+
             </div>
             
         </div>

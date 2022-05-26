@@ -3,7 +3,7 @@ from typing import List
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView
 from requests import RequestException
-from .models import Review, Experience
+from .models import Review, Experience, Tag
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
@@ -61,3 +61,16 @@ def ExperienceList(request):
             'experience_dueto': experinece_dueto,
         }
     )
+
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all()
+
+    return render(
+        request,
+        'blog/post_list.html',
+        {
+            'post_list':post_list,
+            'tag':tag,
+        }
+    ) 
