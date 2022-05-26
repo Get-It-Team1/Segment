@@ -1,7 +1,7 @@
 from pyexpat import model
 from urllib import request
 from django.shortcuts import render
-from .models import Experience, Review
+from .models import Experience, Review, Tag
 from django.views.generic import ListView, DetailView
 
 # Create your views here.
@@ -37,5 +37,18 @@ def ExperienceList(request):
         {
             'experience_pk' : experinece_pk,
             'experience_dueto': experinece_dueto,
+        }
+    )
+
+def tag_page(request, slug):
+    tag = Tag.objects.get(slug=slug)
+    post_list = tag.post_set.all()
+
+    return render(
+        request,
+        'blog/post_list.html',
+        {
+            'post_list':post_list,
+            'tag':tag,
         }
     )

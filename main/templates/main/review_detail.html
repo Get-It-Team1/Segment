@@ -5,6 +5,17 @@
         <div class="col-lg-8">
             <!-- Post content-->
             <article>
+
+                {% if review.tags.exists %}
+                    <i class="fas fa-tags"></i>
+                    {% for tag in review.tags.all %}
+                        <a href="{{ tag.get_absolute_url }}" class="badge rounded-pill bg-primary">
+                            {{ tag }}
+                        </a>
+                    {% endfor %}
+                    <br /><br />
+                {% endif %}
+
                 <!-- Post header-->
                 <header class="mb-4">
                     <!-- Post title-->

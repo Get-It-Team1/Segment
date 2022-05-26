@@ -1,5 +1,17 @@
 from django.db import models
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True,
+            allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/main/tag/{self.slug}/'    
+
+    
 class Review(models.Model):
     #서평 제목
     title = models.CharField(max_length=30)
@@ -10,19 +22,7 @@ class Review(models.Model):
     #작성자
     author = None
     #해시태그
-    tags = models.ManyToManyField(Tag, null=True, blank=True)
-
-class Tag(models.Model):
-    name = models.CharField(max_length=50)
-    slug = models.SlugField(max_length=200, uniaue=True,
-        allow_unicode=True)
-
-    def __str__(self):
-        return self.name
-
-    def get_absolute_url(self):
-        return f'/main/tag/{self.slug}/'    
-
+    tags = models.ManyToManyField(Tag, blank=True)
     #카테고리
 
     #작성일
