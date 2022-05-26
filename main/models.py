@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Review(models.Model):
     #서평 제목
@@ -8,7 +9,7 @@ class Review(models.Model):
     #책 표지
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
     #작성자
-    author = None
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
     #해시태그
     
     #카테고리
