@@ -5,4 +5,5 @@ urlpatterns = [
     path('<int:pk>/', views.ReviewDetail.as_view()),
     path('Experience/', views.ExperienceList),
     path('create_post/', views.PostCreate.as_view()),
+    
 ]
