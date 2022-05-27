@@ -3,6 +3,74 @@
 
 {% block main_area %}
     {%include 'main/swiper.html'%}
+    <!-- 이거는 SW교육에서 제목 바로 밑에 있던 코드인데 카테고리 페이지 맨 위에 어떤 카테고리인지 표시해주는 거일거야
+     우리 웹사이트에 맞춰서 추가해줘-->
+    <!--
+        {% if category %} 
+            <span class="badge bg-secondary">
+                {{category}}
+            </span>
+        {% endif %}
+        {% if tag %}
+            <i class="fas fa-tags"></i>
+            <span class="badge rounded-pill bg-primary">
+                {{ tag }}
+            </span>
+        {% endif %}
+    -->
+
+
+    <!-- 이거는 SW교육 6차시 46분에 나오는 코드인데, 코드가 이렇게 짜여있었고 여기서 단톡방에 올린 사진 중에
+    노란색으로 밑줄치거나 괄호한 부분만 추가한 건데, 추가한 부분은 단톡방 확인하면 될 것 같아!
+    우리 조가 작성한 코드가 Sw교육이랑 달라서 Sw교육의 post_detail 코드 빼온거는 이해해주고 post부분은 Review로 바꿔야 해!
+    밑줄 긋거나 괄호친 부분은 id = "post-{{p.pk}}하고                 
+                {% if p.category %}
+                <span class = "badge badge-secondary float-right">{{p.category}}</span>
+                {% else %}
+                <span class = "badge badge-secondary float-right">미분류</span>
+                {% endif %}
+    이니깐 참고해줘
+    -->
+    <!--
+         <div class="card mb-4" id = "post-{{p.pk}}">
+            {% if p.head_image %}
+            <img class="card-img-top" src="{{ p.head_image.url }}" alt="{{ p }} head image">
+            {% else %}
+            <img class="card-img-top" src="https://picsum.photos/seed/{{ p.id }}/800/200" alt="random_image">
+            {% endif %}
+            <div class="card-body">
+                {% if p.category %}
+                <span class = "badge badge-secondary float-right">{{p.category}}</span>
+                {% else %}
+                <span class = "badge badge-secondary float-right">미분류</span>
+                {% endif %}
+
+                <h2 class="card-title">{{ p.title }}</h2>
+                {% if p.hook_text %}
+                 <h5 class="text-muted">{{ p.hook_text }}</h5>
+                {% endif %}
+                <p class="card-text">{{ p.content | truncatewords:45 }}</p>
+
+                {% if p.tags.exists %}
+                    <i class="fas fa-tags"></i>
+                    {% for tag in p.tags.iterator %}
+                        <a href="{{ tag.get_absolute_url }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ tag }}
+                            </span>
+                        </a>
+                    {% endfor %}
+                    <br/><br/>
+                {% endif %}
+
+                <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+            <div class="card-footer text-muted">
+                Posted on {{ p.created_at }} by
+                <a href="#">{{p.author | upper}}</a>
+            </div>
+        </div>
+    -->
     <div class="container">
         <h1 class="pb-3"><br>서평 모아보기</h1>
         <div class="row my-0">

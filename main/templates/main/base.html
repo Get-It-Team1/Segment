@@ -30,6 +30,26 @@
             </div>
         </div>
     </div>
+    
+    <!--카테고리-사이드바 코드: base.html 중 어디에 넣어야 될지 몰라서 주석처리 했어!
+    SW교육에 있던 base.html코드 보니깐 이 div class가 원래는 <div class="col-md-4 col-lg-3">안에 있었거든 참고해줘
+    아 그리고 경로도 blog로 되어 있으니깐 우리 웹페이지에 맞게 변경해야 할 것 같아-->
+    <!--    
+    <div class="card my-4" id="categories-card">
+        <h5 class="card-header">Categories</h5>
+        <div class="card-body">
+            <div class="row">
+                    <ul>
+                        {% for category in categories %}
+                        <li><a href="{{ category.get_absolute_url }}">{{category}} ({{category.post_set.count}})</a></li>
+                        {% endfor %}
+                        <li><a href="/blog/category/no_category/">미분류 ({{no_category_post_count}})</a></li>
+                    </ul>
+            </div>
+        </div>
+    </div>
+    -->
+
 
     {%include 'main/footer.html'%}
 
