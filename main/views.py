@@ -13,6 +13,7 @@ from django.utils.text import slugify
 #from .forms import CommentForm
 from django.shortcuts import get_object_or_404
 from django.contrib.auth import get_user_model
+from .forms import CommentForm
 
 # Create your views here.
     
@@ -44,11 +45,12 @@ class ReviewDetail(DetailView):
         context = super(ReviewDetail, self).get_context_data()
         context['categories'] = Category.objects.all()
         context['no_category_post_count'] = Review.objects.filter(category = None).count()
+        context['comment_form'] = CommentForm
         return context
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Review
-    fields = ['title', 'content', 'head_image']
+    fields = ['title', 'content', 'head_image', 'category']
 
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.is_staff
@@ -119,3 +121,21 @@ def likes(request, pk):
         like_b.like_count += 1
         like_b.save()
     return redirect('/'+str(pk)+'/')
+
+
+def new_comment(request, pk):
+    if request.user.is_authenticated:
+        review = get_object_or_404(Review, pk=pk)
+
+        if request.method=='POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit = False)
+                comment.review = review
+                comment.author = request.user
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else:
+            return redirect(review.get_absolute_url())
+    else:
+        raise PermissionDenied
