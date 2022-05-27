@@ -14,8 +14,8 @@
     
             {% if user.is_authenticated %}
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
-                    data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle btn" href="#" id="navbarDropdownMenuLink" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false" style="position: relative; top: -10px; left: 200px; background-color: #3c5c3e; color : white">
                     {{user.username}}
                 </a>
                 <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
@@ -24,7 +24,7 @@
             </li>
             {% else %}
             <li class="nav-item">
-                <a href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" style="color:black">로그인</a>
+                <a class = "btn" href="#" class="nav-link" data-bs-toggle="modal" data-bs-target="#loginModal" style="position: relative;  left: 200px; background-color: #3c5c3e; color : white"">로그인</a>
             </li>
             {% endif %}
 
