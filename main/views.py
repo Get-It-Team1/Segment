@@ -3,7 +3,7 @@ from re import L
 from typing import List
 from urllib import request
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
 from requests import RequestException
 from .models import Review, Experience, Tag, Category
 from pyexpat import model
@@ -12,13 +12,14 @@ from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
 #from .forms import CommentForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
 
 # Create your views here.
     
 def ReviewList(request):
     model = Review
     review_pk = Review.objects.all().order_by('-pk')[:18]
-    review_like = Review.objects.all().order_by('-like')[:18]
+    review_like = Review.objects.all().order_by('-like_count')[:18]
 
     def get_context_data(self,**kwargs):
         context = super(ReviewList,self).get_context_data()
@@ -106,3 +107,15 @@ def tag_page(request, slug):
             'tag':tag,
         }
     ) 
+
+def likes(request, pk):
+    like_b = get_object_or_404(Review, pk=pk)
+    if request.user in like_b.like.all():
+        like_b.like.remove(request.user)
+        like_b.like_count -= 1
+        like_b.save()
+    else:
+        like_b.like.add(request.user)
+        like_b.like_count += 1
+        like_b.save()
+    return redirect('/'+str(pk)+'/')

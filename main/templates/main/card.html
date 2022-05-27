@@ -18,13 +18,26 @@
                 </div>
                 
                 <div class="text-small text-muted" style="font-size:  12px;">
-                    Posted on {{ r.created_at }} by
-                    <a href="#">{{ r.author | upper }}</a>
+                    Posted on {{ r.created_at }}
                 </div>
+
                 <div style="position: relative; top: 10px;">
                     <a href="{{ r.category.get_absolute_url }}"><span class = "badge bg-secondary float-right">{{r.category}}</span></a>
                     <span class = "text-end text-small text-muted" style="position: relative; left: 35px;"> like = {{ r.like }}</span>
                 </div>
+
+                {% if r.tags.exists %}
+                    <i class="fas fa-tags"></i>
+                    {% for tag in r.tags.iterator %}
+                        <a href="{{ tag.get_absolute_url }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ tag }}
+                            </span>
+                        </a>
+                    {% endfor %}
+                {% endif %}
+
+                <div class = "text-end text-small text-muted"> <i class="fas fa-heart" style="color:red"></i> {{ r.like_count }}</div>
             </div>
         </div>
     </div>
