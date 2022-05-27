@@ -1,0 +1,17 @@
+{% extends 'main/base_full_width.html' %}
+{% load crispy_forms_tags %}
+
+{% block head_title %}Create Review{% endblock %}
+
+{% block main_area %}
+    <br>
+    <br>
+    <h1>서평 작성하기</h1>
+    <hr>
+    <form method="post" enctype="multipart/form-data">{%csrf_token%}
+        <table>
+            {{form}}
+        </table>
+        <button type="submit" class="btn btn-primary float-right">Submit</button>
+    </form>
+{% endblock %} 

@@ -1,0 +1,22 @@
+{% load static %}
+<div class="card mb-4 mx-2" style="width:320px">
+                
+    <div class="row">
+        <div class="col-md-4">
+            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/350X550/dee2e6/6c757d.jpg"
+                alt="..." /></a>
+        </div>
+        <div class ="col-md-8">
+            <div class="card-body" style="height: 100%;">
+                <div class="card-title" style = "font-size: 18px; height: 30%;"><a href="{{r.get_absolute_url }}">{{ r.title }}<br></a></div>
+                
+                <div class="text-small text-muted text-end " style="font-size:  12px;">
+                    by <a href = "#" class="text-end">작성자 명 쓸 위치</a>
+                </div>
+                <div class="text-small text-muted" style="font-size:  12px;">
+                    Posted on {{ r.created_at }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

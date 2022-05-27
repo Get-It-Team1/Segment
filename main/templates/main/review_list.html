@@ -1,0 +1,34 @@
+{%extends 'main/base.html' %}
+
+
+{% block main_area %}
+    {%include 'main/swiper.html'%}
+    <div class="container">
+        <h1 class="pb-3"><br>서평 모아보기</h1>
+        <div class="row my-0">
+                <h3 class="py-3">새로 올라온 독서평</h3>
+            {% if review_pk.exists %}
+                {% for r in review_pk %}
+                    {% include 'main/card.html' %}
+                {% endfor %}
+            {% else %}
+                <h6>첫 번째 서평의 주인공이 되어보세요!</h6>
+            {% endif %}
+            
+            <div class="border-top my-3" style="border-color: #3c5c3e;"></div>
+                <h3 class="py-3">좋아요가 많은 독서평</h3>
+            {% if review_like.exists %}
+                {% for r in review_like %}
+                    {% include 'main/card.html' %}                    
+                {% endfor %}
+            {% else %}
+                <h6>첫 번째 서평의 주인공이 되어보세요!</h6>
+            {% endif %}
+
+                {% if tag %}<span class="badge rounded-pill bg-primary"><i class="fas fa-tags"></i>{{ tag }}({{ tag.post_set.count }})</span>{% endif %}
+
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}
