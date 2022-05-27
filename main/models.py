@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 class Tag(models.Model):
     name = models.CharField(max_length=50)
@@ -18,7 +19,7 @@ class Review(models.Model):
     #책 표지
     head_image = models.ImageField(upload_to='blog/images/%Y/%m/%d/', blank=True)
     #작성자
-    author = None
+    author = models.ForeignKey(User,on_delete=models.CASCADE)
     #해시태그
     tags = models.ManyToManyField(Tag, blank=True)
 
