@@ -23,7 +23,7 @@ class Tag(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/main/tag/{self.slug}/'  
+        return f'/tag/{self.slug}/'  
 
 class Review(models.Model):
     #서평 제목

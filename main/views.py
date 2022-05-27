@@ -96,7 +96,7 @@ def category_page(request, slug):
 
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
-    review_list = Review.objects.filter(tag = tag)
+    review_list = tag.review_set.all()
 
     return render(
         request,

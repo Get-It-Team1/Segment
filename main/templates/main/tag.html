@@ -1,0 +1,31 @@
+{%extends 'main/base.html' %}
+
+{% block main_area %}
+    <div class="container">
+        <h2>
+            {% if category %}
+                <span class="badge bg-secondary">
+                    {{category}}
+                </span> 카테고리
+            {% endif %}
+            {% if tag %}
+                <i class="fas fa-tags"></i>
+                <span class="badge rounded-pill bg-primary">
+                    {{ tag }}
+                </span> 태그
+            {% endif %}
+        </h2>
+        <div class="row my-0">
+
+
+                <h3 class="py-3">서평 모아보기</h3>
+                {% for r in review_list %}
+                    {% include 'main/card.html' %}
+                {% endfor %}
+
+
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}
