@@ -1,0 +1,59 @@
+{%extends 'main/base.html' %}
+
+
+{% block main_area %}
+    <div class="container">
+        <h2>
+            {% if category %}
+                <span class="badge bg-secondary">
+                    {{category}}
+                </span> 카테고리
+            {% endif %}
+            {% if tag %}
+                <i class="fas fa-tags"></i>
+                <span class="badge rounded-pill bg-primary">
+                    {{ tag }}
+                </span> 태그
+            {% endif %}
+        </h2>
+        <div class="row my-0">
+
+
+        <!--
+         <div class="card mb-4" id = "post-{{p.pk}}">
+
+            이부분은 card.html에 들어갈 것 같고.
+            <div class="card-body">
+                {% if p.category %}
+                <span class = "badge badge-secondary float-right">{{p.category}}</span>
+                {% else %}
+                <span class = "badge badge-secondary float-right">미분류</span>
+                {% endif %}
+                <h2 class="card-title">{{ p.title }}</h2>
+                
+                
+                {% if p.tags.exists %}
+                    <i class="fas fa-tags"></i>
+                    {% for tag in p.tags.iterator %}
+                        <a href="{{ tag.get_absolute_url }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ tag }}
+                            </span>
+                        </a>
+                    {% endfor %}
+                    <br/><br/>
+                {% endif %}
+                <a href="{{ p.get_absolute_url }}" class="btn btn-primary">Read More &rarr;</a>
+            </div>
+    -->
+                <h3 class="py-3">서평 모아보기</h3>
+                {% for r in review_list %}
+                    {% include 'main/card.html' %}
+                {% endfor %}
+
+
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}

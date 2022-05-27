@@ -9,7 +9,7 @@ class Category(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return f'/main/category/{self.slug}/'
+        return f'/category/{self.slug}/'
     #SW교육에서는 경로가 blog/category인데 main/category로 바꿨어
 
     class Meta:
