@@ -12,4 +12,5 @@ urlpatterns = [
     path('tag/<str:slug>/', views.tag_page),    
     path('<int:pk>/like/', views.likes),
     path('<int:pk>/new_comment/', views.new_comment),
+    path('user_blog/', views.user_page),
 ]

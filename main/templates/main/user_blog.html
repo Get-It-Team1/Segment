@@ -1,0 +1,26 @@
+{%extends 'main/base.html' %}
+
+
+{% block main_area %}
+    
+    <div class="container">
+        <div class = "segment-user-desc" style = "height: 250px; background-color: #6e792c;">
+            
+        </div>
+        <div class="row my-0">
+                <h3 class="py-3">Zangsu의 서평</h3>
+            {% if review_list.exists %}
+                {% for r in review_list %}
+                    {% include 'main/card.html' %}
+                {% endfor %}
+            {% else %}
+                <h6>아직 작성 한 글이 없습니다.</h6>
+            {% endif %}
+            
+            {% if tag %}<span class="badge rounded-pill bg-primary"><i class="fas fa-tags"></i>{{ tag }}({{ tag.post_set.count }})</span>{% endif %}
+
+            </div>
+            
+        </div>
+    </div>
+{%endblock%}
