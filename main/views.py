@@ -83,4 +83,4 @@ def likes(request, pk):
         like_b.like.add(request.user)
         like_b.like_count += 1
         like_b.save()
-    return redirect('/')
+    return redirect('/'+str(pk)+'/')
