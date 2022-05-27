@@ -8,6 +8,7 @@ from django.views.generic import ListView, DetailView
 
     
 def ReviewList(request):
+    model = Review
     review_pk = Review.objects.all().order_by('-pk')[:18]
     review_like = Review.objects.all().order_by('-like')[:18]
 
@@ -36,7 +37,6 @@ class ReviewDetail(DetailView):
         context['no_category_post_count'] = Review.objects.filter(category = None).count()
         return context
 
-
 def ExperienceList(request):
     experinece_pk = Experience.objects.all().order_by('-pk')[:18]
     experinece_dueto = Experience.objects.all().order_by('created_at')[:18]
@@ -60,7 +60,7 @@ def category_page(request, slug):
 
     return render(
         request,
-        'main/review_list.html',
+        'main/category.html',
         {
             'review_list': review_list,
             'categories': Category.objects.all(),
