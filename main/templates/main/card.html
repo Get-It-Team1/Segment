@@ -3,8 +3,14 @@
                 
     <div class="row">
         <div class="col-md-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/350X550/dee2e6/6c757d.jpg"
-                alt="..." /></a>
+            <a href="#!">
+                {% if r.head_image %}
+                <img class="card-img-top" src="{{ r.head_image.url }}" 
+                        alt="">
+                {% else %}
+                <img class="card-img-top" src="https://picsum.photos/seed/{{p.id}}/800/200" alt="random_image">
+                {% endif %}
+            </a>
         </div>
         <div class ="col-md-8">
             <div class="card-body py-0" style="height: 100%;">
