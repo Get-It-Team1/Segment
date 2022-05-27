@@ -15,6 +15,16 @@ class Category(models.Model):
     class Meta:
         verbose_name_plural='Categories'
 
+class Tag(models.Model):
+    name = models.CharField(max_length=50)
+    slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/main/tag/{self.slug}/'  
+
 class Review(models.Model):
     #서평 제목
     title = models.CharField(max_length=30)
@@ -28,6 +38,8 @@ class Review(models.Model):
     
     #카테고리
     category = models.ForeignKey(Category ,null=True, on_delete=models.SET_NULL, blank=True)
+    tags = models.ManyToManyField(Tag, blank=True)
+
     #작성일
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
@@ -39,7 +51,7 @@ class Review(models.Model):
 
     def get_absolute_url(self):
         return f'/{self.pk}'
-
+  
 class Experience(models.Model):
     #체험단 제목
     title = models.CharField(max_length=30)

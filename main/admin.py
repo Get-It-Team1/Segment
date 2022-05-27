@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import Experience, Review, Category
+from .models import Experience, Review, Category, Tag
+
 
 # Register your models here.
 
@@ -12,3 +13,7 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Category, CategoryAdmin)
 
+class TagAdmin(admin.ModelAdmin):
+    prepopulated_fields = { 'slug':('name',) }
+
+admin.site.register(Tag, TagAdmin) 
