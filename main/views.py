@@ -60,13 +60,13 @@ def ExperienceList(request):
 
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
-    post_list = tag.post_set.all()
+    review_list = Review.objects.filter(tag = tag)
 
     return render(
         request,
         'main/tag_list.html',
         {
-            'post_list':post_list,
+            'review_list':review_list,
             'tag':tag,
         }
     ) 
