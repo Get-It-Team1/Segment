@@ -1,10 +1,12 @@
+
 from re import L
 from typing import List
-from django.http import JsonResponse
+from urllib import request
 from django.shortcuts import render, redirect
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
 from requests import RequestException
-from .models import Review, Experience, Tag
+from .models import Review, Experience, Tag, Category
+from pyexpat import model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
@@ -15,8 +17,15 @@ from django.contrib.auth import get_user_model
 # Create your views here.
     
 def ReviewList(request):
+    model = Review
     review_pk = Review.objects.all().order_by('-pk')[:18]
     review_like = Review.objects.all().order_by('-like_count')[:18]
+
+    def get_context_data(self,**kwargs):
+        context = super(ReviewList,self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Review.objects.filter(category = None).count()
+        return context
 
     return render(
         request,
@@ -30,6 +39,12 @@ def ReviewList(request):
 
 class ReviewDetail(DetailView):
     model = Review
+
+    def get_context_data(self,**kwargs):
+        context = super(ReviewDetail, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Review.objects.filter(category = None).count()
+        return context
 
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Review
@@ -60,15 +75,35 @@ def ExperienceList(request):
         }
     )
 
+def category_page(request, slug):
+    if slug == 'no_category':
+        category = '미분류'
+        review_list = Review.objects.filter(category=None)
+    else :
+        category = Category.objects.get(slug=slug)
+        review_list = Review.objects.filter(category=category)
+
+    return render(
+        request,
+        'main/category.html',
+        {
+            'review_list': review_list,
+            'categories': Category.objects.all(),
+            'no_category_review_count': Review.objects.filter(category=None).count(),
+            'category': category,
+        }
+    )
+
+
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
-    post_list = tag.post_set.all()
+    review_list = Review.objects.filter(tag = tag)
 
     return render(
         request,
         'main/tag_list.html',
         {
-            'post_list':post_list,
+            'review_list':review_list,
             'tag':tag,
         }
     ) 

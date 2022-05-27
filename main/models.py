@@ -2,6 +2,20 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.conf import settings
 
+class Category(models.Model):
+    name = models.CharField(max_length=50, unique = True)
+    slug = models.SlugField(max_length=200, unique = True, allow_unicode=True)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+        return f'/category/{self.slug}/'
+    #SW교육에서는 경로가 blog/category인데 main/category로 바꿨어
+
+    class Meta:
+        verbose_name_plural='Categories'
+
 class Tag(models.Model):
     name = models.CharField(max_length=50)
     slug = models.SlugField(max_length=200, unique=True, allow_unicode=True)
@@ -23,6 +37,8 @@ class Review(models.Model):
     author = models.ForeignKey(User, null=True, on_delete=models.SET_NULL)
     #해시태그
     tags = models.ManyToManyField(Tag, blank=True)
+    #카테고리
+    category = models.ForeignKey(Category ,null=True, on_delete=models.SET_NULL, blank=True)
 
     #작성일
     created_at = models.DateTimeField(auto_now_add=True)

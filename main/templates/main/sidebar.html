@@ -25,6 +25,20 @@
             </ul>
           </div>
         </li>
+
+        <li class="mb-1">
+          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true" >
+            카테고리
+          </button>
+          <div class="collapse show" id="home-collapse">
+            <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+              {% for category in categories %}
+                <li><a href="{{ category.get_absolute_url }}">{{category}} ({{category.review_set.count}})</a></li>
+              {% endfor %}
+              <li><a href="/category/no_category/">미분류 ({{no_category_post_count}})</a></li>
+            </ul>
+          </div>
+        </li>
         
         {% endif %}
         <li class="mb-1">

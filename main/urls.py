@@ -4,6 +4,7 @@ from . import views
 app_name = "main"
 
 urlpatterns = [
+    path('category/<str:slug>/', views.category_page),
     path('', views.ReviewList),
     path('<int:pk>/', views.ReviewDetail.as_view()),
     path('Experience/', views.ExperienceList),
