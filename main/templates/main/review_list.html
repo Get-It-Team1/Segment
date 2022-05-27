@@ -24,6 +24,9 @@
             {% else %}
                 <h6>첫 번째 서평의 주인공이 되어보세요!</h6>
             {% endif %}
+
+                {% if tag %}<span class="badge rounded-pill bg-primary"><i class="fas fa-tags"></i>{{ tag }}({{ tag.post_set.count }})</span>{% endif %}
+
             </div>
             
         </div>

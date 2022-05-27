@@ -18,7 +18,17 @@
                     Posted on {{ r.created_at }} by
                     <a href="#">{{ r.author | upper }}</a>
                 </div>
-                <div class = "text-end text-small text-muted" style="position: relative; top:15px;"> like = {{ r.like }}</div>
+                {% if r.tags.exists %}
+                    <i class="fas fa-tags"></i>
+                    {% for tag in r.tags.iterator %}
+                        <a href="{{ tag.get_absolute_url }}">
+                            <span class="badge rounded-pill bg-primary">
+                                {{ tag }}
+                            </span>
+                        </a>
+                    {% endfor %}
+                {% endif %}
+                <div class = "text-end text-small text-muted"> like = {{ r.like }}</div>
             </div>
         </div>
     </div>
