@@ -1,20 +1,32 @@
+
 from re import L
 from typing import List
+from urllib import request
 from django.shortcuts import render, redirect
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, View
 from requests import RequestException
-from .models import Review, Experience, Tag
+from .models import Review, Experience, Tag, Category
+from pyexpat import model
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.core.exceptions import PermissionDenied
 from django.utils.text import slugify
 #from .forms import CommentForm
 from django.shortcuts import get_object_or_404
+from django.contrib.auth import get_user_model
+from .forms import CommentForm
 
 # Create your views here.
     
 def ReviewList(request):
+    model = Review
     review_pk = Review.objects.all().order_by('-pk')[:18]
-    review_like = Review.objects.all().order_by('-like')[:18]
+    review_like = Review.objects.all().order_by('-like_count')[:18]
+
+    def get_context_data(self,**kwargs):
+        context = super(ReviewList,self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Review.objects.filter(category = None).count()
+        return context
 
     return render(
         request,
@@ -29,9 +41,16 @@ def ReviewList(request):
 class ReviewDetail(DetailView):
     model = Review
 
+    def get_context_data(self,**kwargs):
+        context = super(ReviewDetail, self).get_context_data()
+        context['categories'] = Category.objects.all()
+        context['no_category_post_count'] = Review.objects.filter(category = None).count()
+        context['comment_form'] = CommentForm
+        return context
+
 class PostCreate(LoginRequiredMixin, UserPassesTestMixin, CreateView):
     model = Review
-    fields = ['title', 'content', 'head_image']
+    fields = ['title', 'content', 'head_image', 'category']
 
     def test_func(self):
         return self.request.user.is_superuser or self.request.user.is_staff
@@ -58,15 +77,76 @@ def ExperienceList(request):
         }
     )
 
+def category_page(request, slug):
+    if slug == 'no_category':
+        category = '미분류'
+        review_list = Review.objects.filter(category=None)
+    else :
+        category = Category.objects.get(slug=slug)
+        review_list = Review.objects.filter(category=category)
+
+    return render(
+        request,
+        'main/category.html',
+        {
+            'review_list': review_list,
+            'categories': Category.objects.all(),
+            'no_category_review_count': Review.objects.filter(category=None).count(),
+            'category': category,
+        }
+    )
+
+
+def user_page(request):
+    review_list = Review.objects.filter(author= '1')
+
+    return render(
+        request,
+        'main/user_blog.html',
+        {
+            'review_list': review_list,
+        }
+    )
+
 def tag_page(request, slug):
     tag = Tag.objects.get(slug=slug)
-    post_list = tag.post_set.all()
+    review_list = tag.review_set.all()
 
     return render(
         request,
         'main/tag_list.html',
         {
-            'post_list':post_list,
+            'review_list':review_list,
             'tag':tag,
         }
     ) 
+
+def likes(request, pk):
+    like_b = get_object_or_404(Review, pk=pk)
+    if request.user in like_b.like.all():
+        like_b.like.remove(request.user)
+        like_b.like_count -= 1
+        like_b.save()
+    else:
+        like_b.like.add(request.user)
+        like_b.like_count += 1
+        like_b.save()
+    return redirect('/'+str(pk)+'/')
+
+
+def new_comment(request, pk):
+    if request.user.is_authenticated:
+        review = get_object_or_404(Review, pk=pk)
+
+        if request.method=='POST':
+            comment_form = CommentForm(request.POST)
+            if comment_form.is_valid():
+                comment = comment_form.save(commit = False)
+                comment.review = review
+                comment.author = request.user
+                comment.save()
+                return redirect(comment.get_absolute_url())
+        else:
+            return redirect(review.get_absolute_url())
+    else:
+        raise PermissionDenied

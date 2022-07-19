@@ -3,32 +3,36 @@
                 
     <div class="row">
         <div class="col-md-4">
-            <a href="#!"><img class="card-img-top" src="https://dummyimage.com/350X550/dee2e6/6c757d.jpg"
-                alt="..." /></a>
+            <a href="#!">
+                {% if r.head_image %}
+                <img class="card-img-top" src="{{ r.head_image.url }}" 
+                        alt="">
+                {% else %}
+                <img class="card-img-top" src="https://picsum.photos/seed/{{p.id}}/800/200" alt="random_image">
+                {% endif %}
+            </a>
         </div>
         <div class ="col-md-8">
             <div class="card-body py-0" style="height: 100%;">
-                <div class="card-title" style = "font-size: 18px; height: 30%;"><a class = " text-decoration-none" href="{{r.get_absolute_url }}" style="color : black;">{{ r.title }}<br></a></div>
+                <!--여기부터 추가 시작-->
+                
+                <!--여기까지-->
+                <div class="card-title mb-0" style = "font-size: 18px; height: 30%;"><a class = " text-decoration-none" href="{{r.get_absolute_url }}" style="color : black;">{{ r.title }}<br></a></div>
                 
                 <div class="text-small text-muted text-end " style="font-size:  12px;">
-                    by <a href = "#" class="text-end text-decoration-none" style="color: black;">작성자 명 쓸 위치</a>
+                    by <a href = "/user_blog/" class="text-end text-decoration-none" style="color: black;">{{r.author}}</a>
                 </div>
                 
                 <div class="text-small text-muted" style="font-size:  12px;">
-                    Posted on {{ r.created_at }} by
-                    <a href="#">{{ r.author | upper }}</a>
+                    Posted on {{ r.created_at }}
                 </div>
-                {% if r.tags.exists %}
-                    <i class="fas fa-tags"></i>
-                    {% for tag in r.tags.iterator %}
-                        <a href="{{ tag.get_absolute_url }}">
-                            <span class="badge rounded-pill bg-primary">
-                                {{ tag }}
-                            </span>
-                        </a>
-                    {% endfor %}
-                {% endif %}
-                <div class = "text-end text-small text-muted"> like = {{ r.like }}</div>
+
+                <div style="position: relative; top: 10px;">
+                    <a href="{{ r.category.get_absolute_url }}"><span class = "badge bg-secondary float-right">{{r.category}}</span></a>
+                </div>
+
+
+                <div class = "text-end text-small text-muted"> <i class="fas fa-heart" style="color:red"></i> {{ r.like_count }}</div>
             </div>
         </div>
     </div>

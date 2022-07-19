@@ -2,17 +2,23 @@
 
 {% block main_area %}
     <div class="container">
-        <h1 class="pb-3"><br>
+        <h2>
+            {% if category %}
+                <span class="badge bg-secondary">
+                    {{category}}
+                </span> 카테고리
+            {% endif %}
             {% if tag %}
+                <i class="fas fa-tags"></i>
                 <span class="badge rounded-pill bg-primary">
-                    <i class="fas fa-tags"></i>{{ tag }}({{ tag.post_set.count }})
-                </span>
-            {% endif %} 모아보기</h1>
+                    {{ tag }}
+                </span> 태그
+            {% endif %}
+        </h2>
         <div class="row my-0">
-            
-            
-           
-                <h3 class="py-3">태그 관련 독서평</h3>
+
+
+                <h3 class="py-3">서평 모아보기</h3>
                 {% for r in review_list %}
                     {% include 'main/card.html' %}
                 {% endfor %}
